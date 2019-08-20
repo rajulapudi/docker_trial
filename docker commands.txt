@@ -1,0 +1,57 @@
+
+Basic Commands for DockerFile:
+
+                      FROM node:10
+                      WORKDIR /app
+                      COPY package.json /app
+                      RUN npm install
+                      COPY . /app
+                      EXPOSE 3000
+                      CMD npm start
+                      
+ Command to convert the node app to a docker image:
+ 
+ > docker build ./ 
+ this will run the DockerFile and path  of ./ or any PATH should point towards the DockerFile this will output the Image file. 
+ 
+ We can give tags also which will be easy to identify the Docker Files
+ > docker build ./ -t myapp
+ 
+ this will give output:
+Successfully built b1bff2dcdbc7
+Successfully tagged myapp:latest
+
+check in docker images
+
+
+From Image
+
+Step:1 - docker pull <image>
+
+check with command : $ docker images
+
+Step:2 - make a container of that image: (containers are running instances of images)
+> docker run --name <name> -p port:port <image name>
+
+to get information on internal docker port run command : 
+> docker inspect <image name>
+
+STOP A RUNNING DOCKER IMAGE:
+
+Should be done on another terminal window ad Docker will occupy that terminal for logs
+Stop a running container through SIGTERM
+> docker stop web
+Stop a running container through SIGKILL
+> docker kill web
+
+LIST ALL CONTAINERS:
+> docker ps -a
+
+REMOVE AL CONTAINERS : 
+> docker rm -f $(docker ps -aq)
+
+LIST AL IMAGES:
+> docker images
+
+REMOVE IMAGES
+> docker rmi <Image Id>
